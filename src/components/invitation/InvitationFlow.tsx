@@ -53,7 +53,7 @@ function InvitationFlow() {
               <div className="invitation-copy" key={currentStage.id}>
                 <div className="stage-kicker">
                   <h1 className="stage-title" id="invitation-message">
-                    <span className="absolute top-10 right-8 z-40 flex size-10 items-center justify-center rounded-full bg-red-100 text-[25px] tracking-tight font-semibold text-[#9e3e5b] border-1 border-[#edc8d4]">
+                    <span className="stage-number">
                       {String(currentStageIndex + 1).padStart(2, "0")}
                     </span>
                     <Typewriter

@@ -8,7 +8,7 @@ function CelebrationScreen({ onContinue }: CelebrationScreenProps) {
   return (
     <>
       <div className="invitation-copy celebration-copy">
-        <div className="stage-kicker">
+        <div className="stage-kicker stage-kicker--icon-left">
           <span aria-hidden="true" className="stage-number">✦</span>
           <span className="stage-label">¡Qué buena noticia!</span>
         </div>

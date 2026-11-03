@@ -55,7 +55,7 @@ function DateForm({ onConfirm }: DateFormProps) {
   return (
     <>
       <div className="invitation-copy form-copy">
-        <div className="stage-kicker">
+        <div className="stage-kicker stage-kicker--icon-left">
           <span aria-hidden="true" className="stage-number">
             ✎
           </span>

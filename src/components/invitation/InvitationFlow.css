@@ -103,10 +103,27 @@
 }
 
 .stage-kicker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  width: 100%;
   margin-bottom: 30px;
+}
+
+.stage-number {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #edc8d4;
+  border-radius: 50%;
+  background: #fef2f2;
+  color: #9e3e5b;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
 .stage-label {
@@ -128,18 +145,41 @@
   text-wrap: pretty;
 }
 
+.invitation-copy .stage-title {
+  position: relative;
+  text-wrap: wrap;
+}
+
+.invitation-copy .stage-title::before {
+  content: "";
+  float: right;
+  width: 40px;
+  height: 40px;
+  margin-left: 0.5em;
+}
+
+.celebration-copy .stage-title::before,
+.form-copy .stage-title::before {
+  content: none;
+}
+
+.stage-kicker--icon-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stage-kicker--icon-left .stage-number {
+  position: static;
+  flex: 0 0 40px;
+}
+
 .typewriter-layout {
-  display: grid;
-  width: 100%;
+  display: inline;
+  white-space: pre-line;
 }
 
-.typewriter-reserve,
-.typewriter-visible {
-  grid-area: 1 / 1;
-  min-width: 0;
-}
-
-.typewriter-reserve {
+.typewriter-character--hidden {
   visibility: hidden;
 }
 
