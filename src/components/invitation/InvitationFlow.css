@@ -109,20 +109,6 @@
   margin-bottom: 30px;
 }
 
-.stage-number {
-  display: grid;
-  width: 38px;
-  height: 38px;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid #edc8d4;
-  border-radius: 50%;
-  background: #ffe5ec;
-  color: #9e3e5b;
-  font-size: 13px;
-  font-weight: 750;
-}
-
 .stage-label {
   color: #8f6575;
   font-size: 10px;
@@ -140,6 +126,21 @@
   letter-spacing: -0.055em;
   line-height: 1.08;
   text-wrap: pretty;
+}
+
+.typewriter-layout {
+  display: grid;
+  width: 100%;
+}
+
+.typewriter-reserve,
+.typewriter-visible {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+
+.typewriter-reserve {
+  visibility: hidden;
 }
 
 .stage-description {
@@ -306,6 +307,13 @@
 .form-field {
   display: grid;
   gap: 6px;
+}
+
+.time-select-group {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 8px;
 }
 
 .form-label {

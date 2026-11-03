@@ -1,4 +1,4 @@
-import { fixedPlanSchedule, foodImageByOption } from '../../data/planOptions'
+import { foodImageByOption } from '../../data/planOptions'
 import type { PlanDetails } from '../../types/invitation'
 import CatMeme from './CatMeme'
 
@@ -9,6 +9,15 @@ interface ConfirmationScreenProps {
 function ConfirmationScreen({ plan }: ConfirmationScreenProps) {
   const selectedFood = plan.places.at(-1)
   const selectedFoodImage = selectedFood ? foodImageByOption[selectedFood] : undefined
+  const date = new Date(`${plan.date}T12:00:00`)
+  const dateDisplay = new Intl.DateTimeFormat('es-CO', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  }).format(date)
+  const [hours = '0', minutes = '00'] = plan.time.split(':')
+  const hour = Number(hours)
+  const timeDisplay = `${hour % 12 || 12}:${minutes} ${hour >= 12 ? 'p. m.' : 'a. m.'}`
 
   return (
     <>
@@ -18,7 +27,7 @@ function ConfirmationScreen({ plan }: ConfirmationScreenProps) {
           <span className="stage-label">Plan listo</span>
         </div>
         <h1 className="stage-title confirmation-title" id="invitation-message">
-          La cita queda para el {fixedPlanSchedule.display}.
+          La cita queda para el {dateDisplay} a las {timeDisplay}.
         </h1>
         {plan.places.length > 0 && (
           <div className="confirmation-detail">

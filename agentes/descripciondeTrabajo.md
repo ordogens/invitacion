@@ -16,6 +16,7 @@ Este es el documento que vamos a usar como punto de partida. Está escrito para 
 
 Proyecto: Invitación interactiva con memes de gatitos
 Proyecto: Invitación interactiva con memes de gatitos
+
 1. Objetivo
 
 Crear una aplicación web interactiva para invitar a una persona a salir.
@@ -25,11 +26,11 @@ La experiencia debe ser divertida, original, ligeramente romántica y casual. No
 La aplicación debe funcionar correctamente tanto en computadores como en celulares.
 
 2. Tecnologías
-React
-TypeScript
-Vite
-Tailwind CSS
-Lucide React para iconos, si es necesario
+   React
+   TypeScript
+   Vite
+   Tailwind CSS
+   Lucide React para iconos, si es necesario
 
 La aplicación debe tener una arquitectura modular y componentes reutilizables.
 
@@ -116,8 +117,7 @@ Mensaje:
 Mostrar dos botones:
 
 ¡Sí, me apunto! 😸
-No, gracias 🙈
-5. Botón interactivo
+No, gracias 🙈 5. Botón interactivo
 
 El botón "No, gracias" debe tener un comportamiento divertido.
 
@@ -193,15 +193,16 @@ No duplicar la lógica de las animaciones.
 Utilizar TypeScript para definir los tipos de los datos y las propiedades de los componentes.
 
 9. Criterios de calidad
-Diseño mobile-first.
-Compatible con navegadores modernos.
-Código legible y organizado.
-Componentes reutilizables.
-No utilizar dependencias innecesarias.
-Respetar las preferencias de movimiento reducido del sistema.
-Evitar errores de TypeScript.
-Verificar que la aplicación funcione con npm run dev.
-Ejecutar el build de producción para comprobar que no existan errores.
+   Diseño mobile-first.
+   Compatible con navegadores modernos.
+   Código legible y organizado.
+   Componentes reutilizables.
+   No utilizar dependencias innecesarias.
+   Respetar las preferencias de movimiento reducido del sistema.
+   Evitar errores de TypeScript.
+   Verificar que la aplicación funcione con npm run dev.
+   Una vez comprobado que funciona, cancelar el npm run dev o parar el servidor.
+   Ejecutar el build de producción para comprobar que no existan errores.
 10. Alcance de la primera fase
 
 En esta primera fase solamente se debe crear el frontend y el flujo visual completo.

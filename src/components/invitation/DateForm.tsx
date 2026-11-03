@@ -1,66 +1,86 @@
-import { useState, type FormEvent } from 'react'
-import { fixedPlanSchedule, foodOptions } from '../../data/planOptions'
-import type { PlanDetails } from '../../types/invitation'
-import CatMeme from './CatMeme'
+import { useState, type FormEvent } from "react";
+import { foodOptions } from "../../data/planOptions";
+import type { PlanDetails } from "../../types/invitation";
+import CatMeme from "./CatMeme";
 
 interface DateFormProps {
-  onConfirm: (plan: PlanDetails) => void
+  onConfirm: (plan: PlanDetails) => void;
 }
 
 function DateForm({ onConfirm }: DateFormProps) {
-  const [message, setMessage] = useState('')
-  const [selectedFoods, setSelectedFoods] = useState<string[]>([])
-  const [foodError, setFoodError] = useState('')
+  const [message, setMessage] = useState("");
+  const [dateTime, setDateTime] = useState("");
+  const [selectedFoods, setSelectedFoods] = useState<string[]>([]);
+  const [foodError, setFoodError] = useState("");
 
   function toggleFood(food: string) {
-    setFoodError('')
+    setFoodError("");
     setSelectedFoods((selected) =>
       selected.includes(food)
         ? selected.filter((item) => item !== food)
         : [...selected, food],
-    )
+    );
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
     if (selectedFoods.length === 0) {
-      setFoodError('Marca al menos una opción de comida.')
-      return
+      setFoodError("Marca al menos una opción de comida.");
+      return;
     }
 
+    const [date = "", time = ""] = dateTime.split("T");
+
     onConfirm({
-      date: fixedPlanSchedule.date,
-      time: fixedPlanSchedule.time,
+      date,
+      time,
       message: message.trim(),
       places: selectedFoods,
-    })
+    });
   }
 
   return (
     <>
       <div className="invitation-copy form-copy">
         <div className="stage-kicker">
-          <span aria-hidden="true" className="stage-number">✎</span>
+          <span aria-hidden="true" className="stage-number">
+            ✎
+          </span>
           <span className="stage-label">Armemos el plan</span>
         </div>
         <h1 className="stage-title form-title" id="invitation-message">
-          La cita queda para el
+          Elige el día y la hora
         </h1>
-        <div aria-label="Viernes 6 de noviembre a las 7 de la noche" className="fixed-schedule">
-          <span className="fixed-schedule-icon" aria-hidden="true">▦</span>
-          <span>viernes 6 de noviembre</span>
-          <span className="fixed-schedule-divider" aria-hidden="true">·</span>
-          <span>7:00 p. m.</span>
-        </div>
+        {/* <p className="form-description">Puedes escoger cualquier día del miércoles 4 al domingo 8 de noviembre.</p> */}
 
         <form className="date-form" onSubmit={handleSubmit}>
-          <fieldset aria-describedby={foodError ? 'food-error' : undefined} className="food-fieldset">
+          <div className="form-field">
+            <label className="form-label" htmlFor="meeting-time">
+              Fecha y hora
+            </label>
+            <input
+              className="form-control"
+              id="meeting-time"
+              lang="en-US"
+              max="2026-11-08T23:59"
+              min="2026-11-04T00:00"
+              name="meeting-time"
+              onChange={(event) => setDateTime(event.target.value)}
+              required
+              type="datetime-local"
+              value={dateTime}
+            />
+          </div>
+          <fieldset
+            aria-describedby={foodError ? "food-error" : undefined}
+            className="food-fieldset"
+          >
             <legend className="food-legend">¿Qué te gustaría comer?</legend>
             <div className="food-options">
               {foodOptions.map((food) => (
                 <label
-                  className={`food-option${selectedFoods.includes(food) ? ' food-option--selected' : ''}`}
+                  className={`food-option${selectedFoods.includes(food) ? " food-option--selected" : ""}`}
                   key={food}
                 >
                   <input
@@ -70,16 +90,24 @@ function DateForm({ onConfirm }: DateFormProps) {
                     type="checkbox"
                     value={food}
                   />
-                  <span className="food-checkmark" aria-hidden="true">✓</span>
+                  <span className="food-checkmark" aria-hidden="true">
+                    ✓
+                  </span>
                   <span className="food-option-label">{food}</span>
                 </label>
               ))}
             </div>
-            {foodError && <span className="form-error" id="food-error" role="alert">{foodError}</span>}
+            {foodError && (
+              <span className="form-error" id="food-error" role="alert">
+                {foodError}
+              </span>
+            )}
           </fieldset>
 
           <div className="form-field">
-            <label className="form-label" htmlFor="message">Mensaje opcional</label>
+            <label className="form-label" htmlFor="message">
+              Mensaje opcional
+            </label>
             <textarea
               className="form-control form-control--textarea"
               id="message"
@@ -104,7 +132,7 @@ function DateForm({ onConfirm }: DateFormProps) {
         />
       </div>
     </>
-  )
+  );
 }
 
-export default DateForm
+export default DateForm;
