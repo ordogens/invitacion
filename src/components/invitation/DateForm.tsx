@@ -4,7 +4,7 @@ import type { PlanDetails } from "../../types/invitation";
 import CatMeme from "./CatMeme";
 
 interface DateFormProps {
-  onConfirm: (plan: PlanDetails) => void;
+  onConfirm: (plan: PlanDetails) => Promise<void>;
 }
 
 function DateForm({ onConfirm }: DateFormProps) {
@@ -12,6 +12,8 @@ function DateForm({ onConfirm }: DateFormProps) {
   const [dateTime, setDateTime] = useState("");
   const [selectedFoods, setSelectedFoods] = useState<string[]>([]);
   const [foodError, setFoodError] = useState("");
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function toggleFood(food: string) {
     setFoodError("");
@@ -22,7 +24,7 @@ function DateForm({ onConfirm }: DateFormProps) {
     );
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (selectedFoods.length === 0) {
@@ -32,12 +34,22 @@ function DateForm({ onConfirm }: DateFormProps) {
 
     const [date = "", time = ""] = dateTime.split("T");
 
-    onConfirm({
-      date,
-      time,
-      message: message.trim(),
-      places: selectedFoods,
-    });
+    setFoodError("");
+    setSubmitError("");
+    setIsSubmitting(true);
+
+    try {
+      await onConfirm({
+        date,
+        time,
+        message: message.trim(),
+        places: selectedFoods,
+      });
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "No pudimos confirmar el plan. Inténtalo de nuevo.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -119,8 +131,10 @@ function DateForm({ onConfirm }: DateFormProps) {
             />
           </div>
 
-          <button className="continue-button date-form-submit" type="submit">
-            Confirmar el plan 😸
+          {submitError && <p className="form-error" role="alert">{submitError}</p>}
+
+          <button aria-busy={isSubmitting} className="continue-button date-form-submit" disabled={isSubmitting} type="submit">
+            {isSubmitting ? "Enviando confirmación…" : "Confirmar el plan 😸"}
           </button>
         </form>
       </div>

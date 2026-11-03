@@ -1,11 +1,3 @@
-import type { PlanDetails } from '../types/invitation'
-
-export const fixedPlanSchedule: Pick<PlanDetails, 'date' | 'time'> & { display: string } = {
-  date: '2026-11-06',
-  time: '19:00',
-  display: 'viernes 6 de noviembre a las 7:00 p. m.',
-}
-
 export const foodOptions = [
   'Salchipapas',
   'Pizza',

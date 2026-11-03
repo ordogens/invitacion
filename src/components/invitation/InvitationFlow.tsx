@@ -7,6 +7,7 @@ import ConfirmationScreen from "./ConfirmationScreen";
 import DateForm from "./DateForm";
 import EscapingButton from "./EscapingButton";
 import Typewriter from "./Typewriter";
+import { sendInvitationConfirmation } from "../../services/invitation.service";
 import "./InvitationFlow.css";
 
 function InvitationFlow() {
@@ -152,7 +153,8 @@ function InvitationFlow() {
 
           {screen === "form" && (
             <DateForm
-              onConfirm={(details) => {
+              onConfirm={async (details) => {
+                await sendInvitationConfirmation(details);
                 setPlan(details);
                 setScreen("confirmation");
               }}
